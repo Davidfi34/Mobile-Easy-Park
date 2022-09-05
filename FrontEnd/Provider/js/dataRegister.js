@@ -1,47 +1,45 @@
+let xhr = new XMLHttpRequest();
+let url = 'http://localhost/Easy-Park/FrontEnd/Provider/php/dataRegister.php'
 // Hacemos referencia al formulario
 const login = document.getElementById("login");
 // Obtenemos los datos de la persona
 let nombre = document.getElementById("nombre");
 let password = document.getElementById("password");
-let usuario = document.getElementById("usuario");
-let localidad = document.getElementById("localidad");
+let telefono = document.getElementById("telefono");
 let email = document.getElementById("email");
-let domicilio = document.getElementById("domicilio");
-let plazas = document.getElementById("plazas");
+let localidad = document.getElementById("localidad");
+// let domicilio = document.getElementById("domicilio");
+// let plazas = document.getElementById("plazas");
 
 nombre.addEventListener('input', updateValueNombre)
 password.addEventListener('input', updateValuePassword)
-usuario.addEventListener('input', updateValueUsuario)
-localidad.addEventListener('input', updateValueLocalidad)
+telefono.addEventListener('input', updateValueTelefono)
 email.addEventListener('input', updateValueEmail)
-domicilio.addEventListener('input', updateValueDomicilio)
-plazas.addEventListener('input', updateValuePlazas)
+localidad.addEventListener('input', updateValueLocalidad)
+// domicilio.addEventListener('input', updateValueDomicilio)
+// plazas.addEventListener('input', updateValuePlazas)
 
 function updateValueNombre(e) {
     nombre = e.target.value
 }
-
 function updateValuePassword(e) {
     password = e.target.value
 }
-function updateValueUsuario(e) {
+function updateValueTelefono(e) {
     usuario = e.target.value
 }
 function updateValueLocalidad(e) {
     localidad = e.target.value
 }
-
 function updateValueEmail(e) {
     email = e.target.value
 }
-function updateValueDomicilio(e) {
-    domicilio = e.target.value
-}
-function updateValuePlazas(e) {
-    plazas = e.target.value
-}
-
-
+// function updateValueDomicilio(e) {
+//     domicilio = e.target.value
+// }
+// function updateValuePlazas(e) {
+//     plazas = e.target.value
+// }
 
 class Person {
     constructor(
@@ -78,11 +76,9 @@ login.onsubmit = (e) => {
     const persona = new Person(
         nombre,
         password,
-        usuario,
-        localidad,
+        telefono,
         email,
-        domicilio,
-        plazas
+        localidad,
     );
 
     // Verificamos que los datos no esten vacios
@@ -95,8 +91,36 @@ login.onsubmit = (e) => {
         }, 2000);
     } else {
         // Convertimos person a JSON
-        const personJSON = JSON.stringify(persona);
-        console.log(personJSON);
+        // const personJSON = JSON.stringify(persona);
+        // console.log(personJSON);
+        // Obtenemos datos del formulario
+        var datos = new FormData(login)
+        console.log(datos.get('nombre'))
+        console.log(datos.get('password'))
+        console.log(datos.get('telefono'))
+        console.log(datos.get('email'))
+        console.log(datos.get('localidad'))
+
+
+        // Usamos fetch para comunicarnos con PHP
+        fetch(url, {
+            method: 'POST',
+            body: datos
+        })
+            // .then(res => res.text())
+            .then(res => res.text())
+            .then(data => {
+
+                if (data === 'ERROR NO SE PUDO REGISTRAR') {
+                    document.getElementById("error").innerHTML = "ERROR NO SE PUDO REGISTRAR";
+                    setTimeout(() => {
+                        document.getElementById("error").innerHTML = "";
+                    }, 3000);
+                } else {
+                    console.log(data)
+                    window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
+                }
+            })
     }
 }
 

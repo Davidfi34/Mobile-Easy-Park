@@ -24,7 +24,8 @@ class Person {
     }
 
     verificacionCamposVacios() {
-        if (this.password === "" || this.usuario === "") {
+        if (this.password == "" || this.usuario == "") {
+            console.log('sexo')
             return false;
         } else {
             return true;
@@ -45,7 +46,6 @@ login.onsubmit = (e) => {
     // Si los datos estan vacios, mostramos un mensaje de error
     if (!verificacion) {
         document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
-        console.log("hola")
         setTimeout(() => {
             document.getElementById("error").innerHTML = "";
         }, 1000);
@@ -60,12 +60,20 @@ login.onsubmit = (e) => {
             method: 'POST',
             body: datos
         })
+        // .then(res => res.text())
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+
+            if (data === false) {
+                document.getElementById("error").innerHTML = "Usuario no valido";
+                setTimeout(() => {
+                    document.getElementById("error").innerHTML = "";
+                }, 3000);
+            }else{
+                console.log(data)
+                window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
+            }
         })
-
-
     }
 }
 
