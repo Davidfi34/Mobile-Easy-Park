@@ -20,7 +20,7 @@
     <form class="login" id="login">
       <fieldset class="form">
         <ul class="container-input">
-          <legend class="bienvenido">Bienvenido</legend>
+          <legend class="bienvenido">Gestionar Estacionamiento</legend>
           <li class="input-container">
             <label for="nomber" class="names">Token Del Cliente: </label>
             <input
@@ -31,28 +31,7 @@
               placeholder="Ingrese el Token del cliente"
             />
           </li>
-          <li class="input-container">
-            <label for="nomber" class="names">Ingrese Plaza: </label>
-            <input
-              type="text"
-              name="numero de plazas"
-              id="plaza"
-              class="input"
-              placeholder="Ingrese la plaza"
-            />
-          </li>
-
-          <!-- <li class="input-container">
-            <label for="nomber" class="names">Estado: </label>
-            <input
-              type="text"
-              name="estado"
-              id="estado"
-              class="input"
-              placeholder="Ingrese la plaza"
-            />
-          </li> -->
-
+        
           <li class="input-container">
             <label for="nomber" class="names">Estado: </label>
             <Select
@@ -67,9 +46,8 @@
           <option value="Disponible">Disponible</option>
           </Select>
           </li>
-
-          <li class="submit">
-            <a href="../index.html" class="button-create">Salir</a>
+           <li class="submit">
+            <a href="./CargarEstacionamiento.html" class="button-create">Cargar Un Estacionamiento</a>
           </li>
           <li class="submit">
             <input
@@ -78,6 +56,9 @@
               value="Enviar"
               class="button-submit"
             />
+          </li>
+          <li class="submit">
+            <a href="../index.html" class="button-create">Salir</a>
           </li>
           <div id="error"></div>
         </ul>

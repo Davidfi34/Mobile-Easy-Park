@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/register.css" />
+    <title>Formulario</title>
+  </head>
+  <body>
+    <!-- Navbar o barra de navegacion -->
+    <div class="topnav">
+      <h3 class="logo">Easy Park</h3>
+      <a class="active" href="#">Quienes Somos</a>
+      <a href="#">Contacto</a>
+      <a href="#">Como se usa?</a>
+    </div>
+
+    <!-- Formulario -->
+    <form class="login" id="login">
+      <fieldset class="form">
+        <ul class="container-input">
+          <legend class="bienvenido">Cargar Estacionamiento</legend>
+          <li class="input-container">
+            <label for="nomber" class="names">Nombre: </label>
+            <input
+              type="text"
+              name="nombre"
+              id="nombre"
+              class="input"
+              placeholder="Ingrese su Nombre"
+            />
+          </li>
+          <li class="input-container">
+            <label for="nomber" class="names">Cantidad de Plazas </label>
+            <input
+              type="number"
+              name="plazas"
+              id="plazas"
+              class="input"
+              placeholder="Ingrese Cantidad de plazas"
+            />
+          </li>
+          <li class="input-container">
+            <label for="nomber" class="names">Precio </label>
+            <input
+              type="number"
+              name="precio"
+              id="precio"
+              class="input"
+              placeholder="Ingrese el Precio"
+            />
+          </li>
+          <li class="input-container">
+            <label for="nomber" class="names">Localidad: </label>
+            <input
+              type="text"
+              name="localidad"
+              id="localidad"
+              class="input"
+              placeholder="Ingrese la localidad"
+            />
+          </li>
+          <li class="input-container">
+            <label for="nomber" class="names">Direccion: </label>
+            <input
+              type="text"
+              name="direccion"
+              id="direccion"
+              class="input"
+              placeholder="Ingrese la direccion"
+            />
+          </li>
+          <li class="submit">
+            <a href="./Home.html" class="button-create">Atras</a>
+          </li>
+          <li class="submit">
+            <input
+              type="submit"
+              name="Entregar"
+              value="Enviar"
+              class="button-submit"
+            />
+          </li>
+          <div id="error"></div>
+        </ul>
+      </fieldset>
+    </form>
+    <script async type="text/javascript" src="../js/dataHome.js"></script>
+  </body>
+</html>
