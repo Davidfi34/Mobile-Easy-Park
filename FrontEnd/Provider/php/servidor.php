@@ -29,18 +29,9 @@
         }
     }
 
-
-// Recibimos los datos desde js
     $usuario =  $_POST['usuario'];
     $password = $_POST['password'];
 
     $test = new ValidarLogin;
     $test->login($usuario,$password)
-
-    // // Aca enviamos la respuesta a javascript como json
-    // $respuesta =  json_encode(
-    //     "correcto: <br>Usuario: '$usuario'. <br>pass: '.$password'"
-    // );
-
-    // echo $respuesta;
 ?>

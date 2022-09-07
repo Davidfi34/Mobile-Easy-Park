@@ -1,6 +1,4 @@
-// Hacemos referencia al formulario
 const login = document.getElementById("login");
-// Obtenemos los datos de la persona
 let token = document.getElementById("token");
 let plaza = document.getElementById("plaza");
 let estado = document.getElementById("estado");
@@ -38,21 +36,15 @@ class Plaza {
 
 login.onsubmit = (e) => {
     e.preventDefault();
-
-    // llamamos a la funcion que crea el objeto
     const nuevaplaza = new Plaza(token, plaza, estado);
-
-    // Verificamos que los datos no esten vacios
     const verificacion = nuevaplaza.verificacionCamposVacios();
 
-    // Si los datos estan vacios, mostramos un mensaje de error
     if (!verificacion) {
         document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
         setTimeout(() => {
             document.getElementById("error").innerHTML = "";
         }, 2000);
     } else {
-        // Convertimos person a JSON
         const personJSON = JSON.stringify(nuevaplaza);
         fetch("localhost:3000/transactions");
     }

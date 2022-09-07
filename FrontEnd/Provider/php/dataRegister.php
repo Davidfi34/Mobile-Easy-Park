@@ -28,8 +28,6 @@
         }
     }
 
-
-// Recibimos los datos desde js
     $nombre =  $_POST['nombre'];
     $password = $_POST['password'];
     $telefono =  $_POST['telefono'];
