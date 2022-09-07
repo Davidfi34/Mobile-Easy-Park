@@ -54,34 +54,8 @@ class Person {
             return true
         }
     }
-}
 
-login.onsubmit = (e) => {
-    e.preventDefault();
-
-    const persona = new Person(
-        nombre,
-        password,
-        telefono,
-        email,
-        localidad,
-    );
-
-    const verificacion = persona.verificacionCamposVacios();
-
-    if (!verificacion) {
-        document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
-        setTimeout(() => {
-            document.getElementById("error").innerHTML = "";
-        }, 2000);
-    } else {
-        var datos = new FormData(login)
-        console.log(datos.get('nombre'))
-        console.log(datos.get('password'))
-        console.log(datos.get('telefono'))
-        console.log(datos.get('email'))
-        console.log(datos.get('localidad'))
-
+    enviarDatos(datos) {
         fetch(url, {
             method: 'POST',
             body: datos
@@ -99,6 +73,27 @@ login.onsubmit = (e) => {
                     window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
                 }
             })
+    }
+}
+
+login.onsubmit = (e) => {
+    e.preventDefault();
+    const persona = new Person(
+        nombre,
+        password,
+        telefono,
+        email,
+        localidad,
+    );
+    const verificacion = persona.verificacionCamposVacios();
+    if (!verificacion) {
+        document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
+        setTimeout(() => {
+            document.getElementById("error").innerHTML = "";
+        }, 2000);
+    } else {
+        let datos = new FormData(login)
+        persona.enviarDatos(datos)
     }
 }
 

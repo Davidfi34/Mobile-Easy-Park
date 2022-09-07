@@ -171,12 +171,10 @@
     position: relative;
     display: flex;
     margin-top: 3vh;
-    background-color: red;
+    background-color: rgb(254, 124, 124);
     color: white;
     font-size: 20px;
     font-weight: bold;
-
-
 }
 
 

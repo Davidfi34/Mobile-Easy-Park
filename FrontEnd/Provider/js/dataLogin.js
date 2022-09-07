@@ -23,48 +23,44 @@ class Person {
 
     verificacionCamposVacios() {
         if (this.password == "" || this.usuario == "") {
-            console.log('sexo')
             return false;
         } else {
             return true;
         }
-
     }
-}
 
-login.onsubmit = (e) => {
-    e.preventDefault();
 
-    const loginPersona = new Person(password, usuario);
-    const verificacion = loginPersona.verificacionCamposVacios();
-
-    if (!verificacion) {
-        document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
-        setTimeout(() => {
-            document.getElementById("error").innerHTML = "";
-        }, 1000);
-    } else {
-        var datos = new FormData(login)
-        console.log(datos.get('usuario'))
-        console.log(datos.get('password'))
-
+    login(datos) {
         fetch(url, {
             method: 'POST',
             body: datos
         })
             .then(res => res.json())
             .then(data => {
-
                 if (data === false) {
                     document.getElementById("error").innerHTML = "Usuario no valido";
                     setTimeout(() => {
                         document.getElementById("error").innerHTML = "";
                     }, 3000);
                 } else {
-                    console.log(data)
                     window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
                 }
             })
+    }
+}
+
+login.onsubmit = (e) => {
+    e.preventDefault();
+    const loginPersona = new Person(password, usuario);
+    const verificacion = loginPersona.verificacionCamposVacios();
+    if (!verificacion) {
+        document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
+        setTimeout(() => {
+            document.getElementById("error").innerHTML = "";
+        }, 1000);
+    } else {
+        let datos = new FormData(login)
+        loginPersona.login(datos);
     }
 }
 

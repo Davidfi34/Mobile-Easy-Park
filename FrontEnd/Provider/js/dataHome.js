@@ -1,52 +1,68 @@
+let xhr = new XMLHttpRequest();
+let url = 'http://localhost/Easy-Park/FrontEnd/Provider/php/dataHome.php';
 const login = document.getElementById("login");
 let token = document.getElementById("token");
-let plaza = document.getElementById("plaza");
 let estado = document.getElementById("estado");
-
 token.addEventListener('input', updateValueToken)
-plaza.addEventListener('input', updateValuePlaza)
 estado.addEventListener('input', updateValueEstado)
 
 function updateValueToken(e) {
     token = e.target.value
 }
-function updateValuePlaza(e) {
-    plaza = e.target.value
-}
 function updateValueEstado(e) {
     estado = e.target.value
 }
 
-
-class Plaza {
-    constructor(token, plaza, estado) {
+class Gestion {
+    constructor(token, estado) {
         this.token = token;
-        this.plaza = plaza;
         this.estado = estado;
     }
 
     verificacionCamposVacios() {
-        if (this.token == "" || this.plaza == "" || this.estado == "") {
+        if (this.token == '' < 0 || this.estado == "") {
+            console.log('sexo')
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
+    gestion(datos) {
+           // fetch(url, {
+        //     method: 'POST',
+        //     body: datos
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+
+        //         if (data === false) {
+        //             document.getElementById("error").innerHTML = "Usuario no valido";
+        //             setTimeout(() => {
+        //                 document.getElementById("error").innerHTML = "";
+        //             }, 3000);
+        //         } else {
+        //             console.log(data)
+        //             window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
+        //         }
+        //     })
+    }
 }
 
 login.onsubmit = (e) => {
     e.preventDefault();
-    const nuevaplaza = new Plaza(token, plaza, estado);
-    const verificacion = nuevaplaza.verificacionCamposVacios();
+
+    const gestion = new Gestion(token, estado);
+    const verificacion = gestion.verificacionCamposVacios();
 
     if (!verificacion) {
         document.getElementById("error").innerHTML = "Todos los campos son obligatorios";
         setTimeout(() => {
             document.getElementById("error").innerHTML = "";
-        }, 2000);
+        }, 1000);
     } else {
-        const personJSON = JSON.stringify(nuevaplaza);
-        fetch("localhost:3000/transactions");
+        var datos = new FormData(login)
+        gestion.gestion(datos)
     }
 }
 
