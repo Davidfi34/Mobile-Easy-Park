@@ -20,8 +20,7 @@ class Gestion {
     }
 
     verificacionCamposVacios() {
-        if (this.token == '' < 0 || this.estado == "") {
-            console.log('sexo')
+        if (this.token == '' || this.estado == '') {
             return false;
         } else {
             return true;
@@ -29,23 +28,18 @@ class Gestion {
     }
 
     gestion(datos) {
-           // fetch(url, {
-        //     method: 'POST',
-        //     body: datos
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-
-        //         if (data === false) {
-        //             document.getElementById("error").innerHTML = "Usuario no valido";
-        //             setTimeout(() => {
-        //                 document.getElementById("error").innerHTML = "";
-        //             }, 3000);
-        //         } else {
-        //             console.log(data)
-        //             window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
-        //         }
-        //     })
+           fetch(url, {
+            method: 'POST',
+            body: datos
+        })
+            .then(res => res.json())
+            .then(data => {
+                if(data != false){
+                    document.getElementById("resultado").innerHTML = `El vehiculo con la patente ${data.patente} ingreso el ${data.ingreso} y sale el ${data.salida}`;
+                }else if(data == false){
+                    document.getElementById("error").innerHTML = 'No se encontro el vehiculo';
+                }   
+            })
     }
 }
 

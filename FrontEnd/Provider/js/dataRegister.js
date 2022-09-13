@@ -47,8 +47,7 @@ class Person {
     }
 
     verificacionCamposVacios() {
-        if (this.nombre == "") {
-            console.log(this.nombre)
+        if (this.nombre === "" || this.password === "" || this.usuario === "" || this.localidad === "" || this.email === "" || this.domicilio === "" || this.plazas === "") {
             return false;
         } else {
             return true
@@ -69,7 +68,6 @@ class Person {
                         document.getElementById("error").innerHTML = "";
                     }, 3000);
                 } else {
-                    console.log(data)
                     window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
                 }
             })

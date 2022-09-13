@@ -16,7 +16,7 @@ function updateValueUsuario(e) {
 
 
 class Person {
-    constructor(password, usuario) {
+    constructor(password, usuario, codigo) {
         this.password = password;
         this.usuario = usuario;
     }
@@ -43,6 +43,7 @@ class Person {
                         document.getElementById("error").innerHTML = "";
                     }, 3000);
                 } else {
+                    localStorage.setItem('codigo', data.cod_proveedor);
                     window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
                 }
             })

@@ -1,19 +1,23 @@
 let xhr = new XMLHttpRequest();
-let url = 'http://localhost/Easy-Park/FrontEnd/Provider/php/dataHome.php';
+let url = 'http://localhost/Easy-Park/FrontEnd/Provider/php/dataCargar.php';
 const login = document.getElementById("login");
 let nombre = document.getElementById("nombre");
 let plazas = document.getElementById("plazas");
 let horario = document.getElementById("horario");
 let precio = document.getElementById("precio");
-let localidad = document.getElementById("localidad");
-let direccion = document.getElementById("direccion");
+let ciudad = document.getElementById("ciudad");
+let provincia = document.getElementById("provincia");
+let calle = document.getElementById("calle");
+let numero = document.getElementById("numero");
 
 nombre.addEventListener('input', updateValueNombre)
 plazas.addEventListener('input', updateValuePlazas)
 horario.addEventListener('input', updateValueHorario)
 precio.addEventListener('input', updateValuePrecio)
-localidad.addEventListener('input', updateValueLocalidad)
-direccion.addEventListener('input', updateValueDireccion)
+ciudad.addEventListener('input', updateValueCiudad)
+provincia.addEventListener('input', updateValueProvincia)
+calle.addEventListener('input', updateValueCalle)
+numero.addEventListener('input', updateValueNumero)
 
 function updateValueNombre(e) {
     nombre = e.target.value
@@ -27,11 +31,21 @@ function updateValueHorario(e) {
 function updateValuePrecio(e) {
     precio = e.target.value
 }
-function updateValueLocalidad(e) {
-    localidad = e.target.value
+
+function updateValueCiudad(e) {
+    ciudad = e.target.value
 }
-function updateValueDireccion(e) {
-    direccion = e.target.value
+
+function updateValueProvincia(e) {
+    provincia = e.target.value
+}
+
+function updateValueCalle(e) {
+    calle = e.target.value
+}
+
+function updateValueNumero(e) {
+    numero = e.target.value
 }
 
 class CargarEstacionamiento {
@@ -40,43 +54,54 @@ class CargarEstacionamiento {
         plazas,
         horario,
         precio,
-        localidad,
-        direccion
+        ciudad,
+        provincia,
+        calle,
+        numero
     ) {
         this.nombre = nombre;
         this.plazas = plazas;
         this.horario = horario;
         this.precio = precio;
-        this.localidad = localidad;
-        this.direccion = direccion;
+        this.ciudad = ciudad;
+        this.provincia = provincia;
+        this.calle = calle;
+        this.numero = numero;
     }
 
     verificacionCamposVacios() {
-        if (this.token == '' < 0 || this.estado == "") {
+        if (this.nombre.value == "" || this.plazas.value == "" || this.horario.value == "" || this.precio.value == "" || this.ciudad.value == "" || this.provincia.value == "" || this.calle.value == "" || this.numero.value == "") {
             return false;
         } else {
             return true;
         }
     }
 
-    cargarEstacionamiento(datos) {
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: datos
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
+    cargar() {
+        let codigo = localStorage.getItem('codigo');
 
-        //         if (data === false) {
-        //             document.getElementById("error").innerHTML = "Usuario no valido";
-        //             setTimeout(() => {
-        //                 document.getElementById("error").innerHTML = "";
-        //             }, 3000);
-        //         } else {
-        //             console.log(data)
-        //             window.location.href = "http://localhost/Easy-Park/FrontEnd/Provider/pages/Home.html";
-        //         }
-        //     })
+        let datos = new FormData();
+        datos.append('nombre', this.nombre.value);
+        datos.append('plazas', this.plazas.value);
+        datos.append('horario', this.horario.value);
+        datos.append('precio', this.precio.value);
+        datos.append('ciudad', this.ciudad.value);
+        datos.append('provincia', this.provincia.value);  
+        datos.append('calle', this.calle.value);
+        datos.append('numero', this.numero.value);
+        datos.append('codigo', codigo);
+
+        fetch(url, {
+            method: 'POST',
+            body: datos
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (JSON.parse(data) == true) {
+                    alert("Estacionamiento cargado correctamente");
+                    location.reload();
+                }
+            })
     }
 }
 
@@ -88,8 +113,10 @@ login.onsubmit = (e) => {
         plazas,
         horario,
         precio,
-        localidad,
-        direccion
+        ciudad,
+        provincia,
+        calle,
+        numero
     );
 
     const verificacion = cargarestacionamiento.verificacionCamposVacios();
@@ -100,8 +127,7 @@ login.onsubmit = (e) => {
             document.getElementById("error").innerHTML = "";
         }, 1000);
     } else {
-        var datos = new FormData(login)
-        cargarestacionamiento.cargarEstacionamiento(datos);
+        cargarestacionamiento.cargar();
     }
 }
 

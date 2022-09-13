@@ -1,14 +1,15 @@
 <?php
     require '../../../backend/Conexion.php';
-    class ValidarLogin extends Conexion{
+    class ObtenerPatente extends Conexion{
 
         public function ValidarLogin(){
             parent::Conexion();
         }
-    
-        public function login($nombre,$password,$telefono, $email,$localidad){
-            if($nombre == '' or $password == '' or $telefono == '' or $email == '' or $localidad == '' ){
-                echo json_encode( "validacion registro andando: <br>Usuario: '$nombre'. <br>pass: '.$password'");
+        
+        public function patente($token, $estado){
+
+            if($token == '' or $estado == ''){
+                echo json_encode( "validacion registro andando: <br>Usuario: '$token'. <br>pass: '.$estado'");
             }else{
                 $host  ='bp6nfzavyucdmj07us1w-mysql.services.clever-cloud.com';
                 $user ='ukfwnbqeu0ysoyct';
@@ -17,24 +18,22 @@
 
                 $connect = new mysqli("$host","$user","$pass","$db");
 
-                $ingreso = $connect -> query("INSERT INTO proveedor (`cod_proveedor`, `nombre`, `password` , `telefono`, `mail`, `fecha_inscripcion`,`localidad`)
-                VALUES (NULL, '$nombre','$password','$telefono','$email', CURDATE(),'$localidad')");
-                if($ingreso === TRUE){
-                    echo "USUARIO REGISTRADO";
-                } else {
-                  echo "ERROR NO SE PUDO REGISTRAR";
+                $consulta = $connect -> query("SELECT * FROM reserva WHERE token = '$token'");
+                $ver = mysqli_num_rows($consulta);
+                if($ver > 0){
+                    $datos = mysqli_fetch_assoc($consulta);
+                    echo json_encode($datos, JSON_NUMERIC_CHECK|JSON_PRETTY_PRINT| JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                }else{
+                    echo json_encode(false);
                 }
             }
         }
     }
 
-    $nombre =  $_POST['nombre'];
-    $password = $_POST['password'];
-    $telefono =  $_POST['telefono'];
-    $email = $_POST['email'];
-    $localidad = $_POST['localidad'];
+    $token =  $_POST['token'];
+    $estado = $_POST['estado'];
 
-    $test = new ValidarLogin;
-    $test->login($nombre,$password,$telefono, $email,$localidad)
 
+    $test = new ObtenerPatente;
+    $test->patente( $token,$estado);
 ?>
