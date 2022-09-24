@@ -190,7 +190,7 @@ class _RegistroState extends State<Registro> {
                           ),
                           child: TextFormField(
                             controller: myController,
-                            validator: (value) => ValidaPass(value),
+                            validator: (value) => ValidaPass(value!),
                             onSaved: (newValue) => _pass = newValue!,
                             obscureText: _hide,
                             cursorColor: claro,

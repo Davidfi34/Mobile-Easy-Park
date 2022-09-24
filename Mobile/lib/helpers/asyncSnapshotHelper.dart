@@ -1,9 +1,10 @@
 import 'package:easy_park/colors/color.dart';
+import 'package:easy_park/helpers/distancias.dart';
 import 'package:easy_park/widgets/card_prov.dart';
 
 import 'package:flutter/material.dart';
 
-Widget asyncSnapshotHelper(AsyncSnapshot snapshot) {
+Widget asyncSnapshotHelper(AsyncSnapshot snapshot, userLocation) {
   Widget element = Container();
   if (snapshot.hasError) {
   } else if (!snapshot.hasData) {
@@ -21,6 +22,8 @@ Widget asyncSnapshotHelper(AsyncSnapshot snapshot) {
           double lat = data.latitud;
           String horario = data.horario;
           double long = data.longitud;
+          double distancia = calculateDistance(
+              userLocation.latitude, userLocation.longitude, lat, long);
           int cantidad = data.cantidad;
           String imagen = data.imagen;
           int precio = data.precio;
@@ -31,6 +34,7 @@ Widget asyncSnapshotHelper(AsyncSnapshot snapshot) {
               id: id,
               latitud: lat,
               longitud: long,
+              distancia: distancia,
               horario: horario,
               imagen: imagen,
               precio: precio);
