@@ -69,11 +69,11 @@ class _Card_ProvState extends State<Card_Prov> {
                   width: 120,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(//
+                      image: NetworkImage(
                           "${widget.imagen}"), //AssetImage('assets/Parking.jpg'),
                       fit: BoxFit.cover,
                     ),
-                    color: azulclaro,
+                    color: claro,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -144,7 +144,7 @@ class _Card_ProvState extends State<Card_Prov> {
                     child: Text(
                       "${widget.distancia.toStringAsFixed(1)} km",
                       style: const TextStyle(
-                        fontSize: 15.0,
+                        fontSize: 14.0,
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.bold,
                         color: Colors.orangeAccent,

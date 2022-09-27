@@ -287,12 +287,7 @@ class _PageReservaState extends State<PageReserva> {
         showTitleActions: true,
         minTime: IngresoController.text.isNotEmpty
             ? DateTime.parse(IngresoController.text)
-                .add(const Duration(minutes: 30))
-            : DateTime.now().add(const Duration(
-                minutes: 30)), // DateTime.parse(IngresoController.text),
-
-        // DateTime.parse(IngresoController.text), //DateTime.now(),
-
+            : DateTime.now(),
         maxTime: SalidaController.text.isNotEmpty
             ? DateTime.parse(SalidaController.text)
             : DateTime.now().add(const Duration(days: 1)), onChanged: (date) {

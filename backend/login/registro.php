@@ -17,15 +17,15 @@ class Registro extends  Conexion{
             $ver = mysqli_num_rows($verUsuario);
             
             if($ver > 0){
-                echo "EL MAIL YA ESTA REGISTRADO";
+                echo "0";
             }else{
                 $ingreso = mysqli_query($this -> conexion_db, "INSERT INTO $tipoUsuario (`$id`, `nombre`, `mail`, `password`, `telefono`, `fecha_inscripcion`,`localidad`)
                 VALUES (NULL, '$nombre','$mail','$pass',$tel, '$fecha','$localidad')");
                 if($ingreso === TRUE){
-                    echo "USUARIO REGISTRADO";
+                    echo "1";
                     
                 }else{
-                    echo "ERROR NO SE PUDO REGISTRAR";
+                    echo "ERROR";
                 }
             }
 
